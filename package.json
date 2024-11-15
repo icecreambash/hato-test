@@ -13,7 +13,9 @@
     "@nuxt/devtools": "latest",
     "@nuxt/image": "^1.5.0",
     "@nuxt/ui": "^2.13.0",
-    "nuxt": "^3.10.1"
+    "nuxt": "^3.14.159",
+    "vue": "latest",
+    "vue-router": "latest"
   },
   "dependencies": {
     "@vueuse/motion": "^2.1.0"
