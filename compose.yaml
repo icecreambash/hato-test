@@ -10,3 +10,9 @@ services:
       - "5555:5555"
     environment:
       PORT: 5555
+    networks:
+      - master
+
+
+networks:
+  master:
