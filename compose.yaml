@@ -10,6 +10,7 @@ services:
       - "5555:5555"
     environment:
       PORT: 5555
+    network_mode: "host"
     networks:
       - master
 
