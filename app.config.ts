@@ -10,7 +10,7 @@ export default defineAppConfig({
   },
   data: {
     name: "Warebird",
-    photo: "/utka.png",
+    photo: "/utka.svg",
     title: "Fast and elastic",
     bio: "Проектируем быстрые, масштабируемые и простые приложения",
     website: "https://warebird.com",
