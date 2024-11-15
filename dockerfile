@@ -1,23 +1,30 @@
-FROM node:20-alpine
 
-# install simple http server for serving static content
-RUN npm install -g http-server
+ARG NODE_VERSION=20.18.0
 
-# make the 'app' folder the current working directory
-WORKDIR /app
+FROM node:${NODE_VERSION}-slim as base
 
-# copy both 'package.json' and 'package-lock.json' (if available)
-COPY package*.json ./
+ARG PORT=5555
 
-# install project dependencies
+WORKDIR /src
+
+# Build
+FROM base as build
+
+COPY --link package.json package-lock.json .
 RUN npm install
 
-# copy project files and folders to the current working directory (i.e. 'app' folder)
-COPY . .
+COPY --link . .
 
-# build app for production with minification
 RUN npm run build
 
-EXPOSE 5555
+# Run
+FROM base
 
-CMD [ "http-server", "dist" ]
+ENV PORT=$PORT
+ENV NODE_ENV=production
+
+COPY --from=build /src/.output /src/.output
+# Optional, only needed if you rely on unbundled dependencies
+# COPY --from=build /src/node_modules /src/node_modules
+
+CMD [ "node", ".output/server/index.mjs" ]
